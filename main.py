@@ -22,8 +22,8 @@ class Motor():
         self.registro: int = registro
 
     def asignarTipo(self, tipo: str) -> None:
-    if tipo in Motor.tiposPosibles:
-        self.tipo: str = tipo
+        if tipo in Motor.tiposPosibles:
+            self.tipo: str = tipo
 
 class Auto():
     cantidadCreados: int = 0
@@ -43,19 +43,12 @@ class Auto():
         return contador
         
     def verificarIntegridad(self) -> str:
-    for asiento in self.asientos:
-        if isinstance(asiento, Asiento):
-            if asiento.registro != self.motor.registro:
-                return "Las piezas no son originales"
+        for asiento in self.asientos:
+            if isinstance(asiento, Asiento):
+                if asiento.registro != self.motor.registro:
+                    return "Las piezas no son originales"
             elif asiento.registro != self.registro:
                 return "Las piezas no son originales"
             elif self.registro != self.motor.registro:
                 return "Las piezas no son originales"
-    return "Auto original"
-
-
-
-
-
-
-
+                return "Auto original"
