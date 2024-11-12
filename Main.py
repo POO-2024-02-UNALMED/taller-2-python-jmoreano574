@@ -1,51 +1,61 @@
-class Asiento:
-    def _init_(self,color,precio,registro) :
-        self.color=color
-        self.precio=precio
-        self.registro=registro
+class Asiento():
+    colores: list[str] = ["rojo", "verde", "amarillo", "negro", "blanco"]
 
-    def cambiarColor(self,Piel):
-        if Piel=="rojo" or  Piel=="verde" or Piel=="amarillo" or Piel=="negro" or Piel=="blanco":
-            self.color=Piel
+    def __init__(self, color: str, precio: int, registro: int) -> None:
+        self.color: str = color
+        self.precio: int = precio
+        self.registro: int = registro
+
+    def cambiarColor(self, color: str) -> None:
+        if color in Asiento.colores:
+            self.color: str = color
+
+class Motor():
+    tiposPosibles: list[str] = ["electrico", "gasolina"]
+
+    def __init__(self, numeroCilindros: int, tipo: str, registro: int) -> None:
+        self.numeroCilindros: int = numeroCilindros
+        self.tipo: str = tipo
+        self.registro: int = registro
+
+    def cambiarRegistro(self, registro: int) -> None:
+        self.registro: int = registro
+
+    def asignarTipo(self, tipo: str) -> None:
+    if tipo in Motor.tiposPosibles:
+        self.tipo: str = tipo
+
+class Auto():
+    cantidadCreados: int = 0
+    def __init__(self, modelo: str, precio: int, asientos: list[Asiento], marca: str, motor: Motor, registro: int) -> None:
+        self.modelo: str = modelo
+        self.precio: int = precio
+        self.asientos: list[Asiento] = asientos
+        self.marca: str = marca
+        self.motor: Motor = motor
+        self.registro: int = registro
+
+    def cantidadAsientos(self) -> int:
+        contador = 0
+        for i in self.asientos:
+            if isinstance(i, Asiento):
+                contador += 1
+        return contador
+        
+    def verificarIntegridad(self) -> str:
+    for asiento in self.asientos:
+        if isinstance(asiento, Asiento):
+            if asiento.registro != self.motor.registro:
+                return "Las piezas no son originales"
+            elif asiento.registro != self.registro:
+                return "Las piezas no son originales"
+            elif self.registro != self.motor.registro:
+                return "Las piezas no son originales"
+    return "Auto original"
 
 
-class Motor:
-    def _init_(self,numeroCilindros,tipo,registro):
-        self.numeroCilindros=numeroCilindros
-        self.tipo=tipo
-        self.registro=registro
-
-    def cambiarRegistro (self,a):
-        self.registro=a
-
-    def asignarTipo(self,newtipo):
-        if newtipo in ["gasolina","electrico"]:
-            self.tipo=newtipo
 
 
-class Auto:
-    cantidadCreados=0
-    def _init_(self,modelo,precio,asientos,marca,motor,registro) :
-        self.modelo=modelo
-        self.precio=precio
-        self.asientos=asientos
-        self.marca=marca
-        self.motor=motor
-        self.registro=registro
-    
-    def cantidadAsientos(self):
-        c=0
-        for h in self.asientos:
-            if type(h)==Asiento:
-                c+=1
-        return c
-    
-    def verificarIntegridad(self):
-       for asiento in self.asientos:
-         if asiento is None:
-            continue
-         if (self.registro is None) or (asiento.registro is None) or (self.motor.registro is None):
-            continue
-         if self.registro != asiento.registro or asiento.registro != self.motor.registro:
-            return "Las piezas no son originales"
-       return "Auto original"
+
+
+
